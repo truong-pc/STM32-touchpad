@@ -6,12 +6,12 @@
         "Components": [
           {
             "Type": "ButtonWithLabel",
-            "Name": "buttonWithLabel1",
+            "Name": "btnGoFN",
             "X": 196,
             "Y": 4,
             "Width": 36,
             "Height": 36,
-            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_outline_action.png",
             "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_normal.png",
             "TextId": "__SingleUse_U2NN",
             "ReleasedColor": {
@@ -24,8 +24,7 @@
               "Green": 255,
               "Blue": 255
             },
-            "TextRotation": "0",
-            "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_normal.json"
+            "TextRotation": "0"
           }
         ],
         "Interactions": [
@@ -33,7 +32,7 @@
             "InteractionName": "Interaction1",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "buttonWithLabel1"
+              "TriggerComponent": "btnGoFN"
             },
             "Action": {
               "Type": "ActionGotoScreen",

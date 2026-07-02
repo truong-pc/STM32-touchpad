@@ -175,7 +175,6 @@ static LCD_DrvTypeDef* LcdDrv;
 
 uint32_t I2c3Timeout = I2C3_TIMEOUT_MAX; /*<! Value of Timeout when I2C communication fails */
 uint32_t Spi5Timeout = SPI5_TIMEOUT_MAX; /*<! Value of Timeout when SPI communication fails */
-int gHighScore = 0;
 /* USER CODE END 0 */
 
 /**
@@ -1146,16 +1145,7 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  control = 0;
-	  if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_2) == GPIO_PIN_RESET)
-		  control = 1;
-	  if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_3) == GPIO_PIN_RESET)
-		  control = 2;
-
-	  if (control != 0)
-		  osMessageQueuePut(myQueue01Handle, &control, 0, 0);
-	  //HAL_UART_Transmit(&huart1, &control, 2, 100);
-	  osDelay(1);
+	  
   }
   /* USER CODE END 5 */
 }

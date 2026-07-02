@@ -13,13 +13,13 @@ ScreenMainViewBase::ScreenMainViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    buttonWithLabel1.setXY(196, 4);
-    buttonWithLabel1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_MICRO_FILL_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_MICRO_FILL_PRESSED_ID));
-    buttonWithLabel1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_U2NN));
-    buttonWithLabel1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1.setAction(buttonCallback);
-    add(buttonWithLabel1);
+    btnGoFN.setXY(196, 4);
+    btnGoFN.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_MICRO_FILL_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_MICRO_OUTLINE_ACTION_ID));
+    btnGoFN.setLabelText(touchgfx::TypedText(T___SINGLEUSE_U2NN));
+    btnGoFN.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    btnGoFN.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    btnGoFN.setAction(buttonCallback);
+    add(btnGoFN);
 }
 
 ScreenMainViewBase::~ScreenMainViewBase()
@@ -34,10 +34,10 @@ void ScreenMainViewBase::setupScreen()
 
 void ScreenMainViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
-    if (&src == &buttonWithLabel1)
+    if (&src == &btnGoFN)
     {
         //Interaction1
-        //When buttonWithLabel1 clicked change screen to ScreenFN
+        //When btnGoFN clicked change screen to ScreenFN
         //Go to ScreenFN with no screen transition
         application().gotoScreenFNScreenNoTransition();
     }

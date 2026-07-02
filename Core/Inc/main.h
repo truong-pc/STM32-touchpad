@@ -74,7 +74,6 @@ void Error_Handler(void);
 #define BTN_RIGHT_GPIO_Port GPIOG
 
 /* USER CODE BEGIN Private defines */
-extern int gHighScore;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

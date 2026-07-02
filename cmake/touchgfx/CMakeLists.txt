@@ -21,9 +21,6 @@ set(TouchGFX_Include_Dirs
 set(TouchGFX_Src
     ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/common/FrontendApplication.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/model/Model.cpp
-    ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/screen1_screen/Screen1View.cpp
-    ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/screen2_screen/Screen2Presenter.cpp
-    ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/screen2_screen/Screen2View.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/screenfn_screen/ScreenFNPresenter.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/screenfn_screen/ScreenFNView.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/gui/src/screenmain_screen/ScreenMainPresenter.cpp
@@ -53,7 +50,6 @@ set(TouchGFX_Src
     ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/SVGDatabase.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_containers_large_narrow_dark.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_icon_rounded_micro_fill_normal.cpp
-    ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_icon_rounded_micro_outline_action.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_icon_rounded_tiny_fill_active.cpp
     ${CMAKE_SOURCE_DIR}/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_icon_rounded_tiny_fill_normal.cpp
