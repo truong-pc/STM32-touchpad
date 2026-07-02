@@ -14,3 +14,9 @@ void ScreenMainView::tearDownScreen()
 {
     ScreenMainViewBase::tearDownScreen();
 }
+
+void ScreenMainView::handleDragEvent(const touchgfx::DragEvent& evt)
+{
+    ScreenMainViewBase::handleDragEvent(evt);
+    presenter->moveMouse(evt.getDeltaX(), evt.getDeltaY());
+}

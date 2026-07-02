@@ -16,3 +16,8 @@ void ScreenMainPresenter::deactivate()
 {
 
 }
+
+void ScreenMainPresenter::moveMouse(int16_t dx, int16_t dy)
+{
+    model->moveMouse(dx, dy);
+}

@@ -25,6 +25,9 @@ public:
      */
     virtual void deactivate();
 
+    void sendKey(uint8_t code);
+    void sendConsumer(uint8_t usage);
+
     virtual ~ScreenFNPresenter() {}
 
 private:

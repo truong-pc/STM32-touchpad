@@ -11,6 +11,14 @@ public:
     virtual ~ScreenFNView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    virtual void arrowUpClicked();
+    virtual void arrowDownClicked();
+    virtual void arrowLeftClicked();
+    virtual void arrowRightClicked();
+    virtual void volUpClicked();
+    virtual void volDownClicked();
+    virtual void playPauseClicked();
 protected:
 };
 

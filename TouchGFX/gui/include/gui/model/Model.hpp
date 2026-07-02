@@ -15,6 +15,10 @@ public:
 
     void tick();
 
+    void moveMouse(int16_t dx, int16_t dy);
+    void sendKey(uint8_t code);
+    void sendConsumer(uint8_t usage);
+
 protected:
     ModelListener* modelListener;
 };

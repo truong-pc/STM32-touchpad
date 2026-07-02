@@ -16,3 +16,13 @@ void ScreenFNPresenter::deactivate()
 {
 
 }
+
+void ScreenFNPresenter::sendKey(uint8_t code)
+{
+    model->sendKey(code);
+}
+
+void ScreenFNPresenter::sendConsumer(uint8_t usage)
+{
+    model->sendConsumer(usage);
+}

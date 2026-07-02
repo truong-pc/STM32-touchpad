@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Components/ili9341/ili9341.h"
+#include "hid_events.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -1160,10 +1161,47 @@ void StartDefaultTask(void *argument)
 void StartButtonTask(void *argument)
 {
   /* USER CODE BEGIN StartButtonTask */
+  /* Poll PG2/PG3 every ~15 ms. Buttons are active-low (pressed = 0).
+     A state is accepted only after 2 identical consecutive reads (debounce),
+     and an event is queued only when the debounced state changes. */
+  uint8_t stableButtons = 0; /* debounced state: bit0=left(PG2), bit1=right(PG3) */
+  uint8_t lastRaw = 0;
+  uint8_t sameCount = 0;
+
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    uint8_t raw = 0;
+    if (HAL_GPIO_ReadPin(BTN_LEFT_GPIO_Port, BTN_LEFT_Pin) == GPIO_PIN_RESET)
+    {
+      raw |= 0x01U;
+    }
+    if (HAL_GPIO_ReadPin(BTN_RIGHT_GPIO_Port, BTN_RIGHT_Pin) == GPIO_PIN_RESET)
+    {
+      raw |= 0x02U;
+    }
+
+    if (raw == lastRaw)
+    {
+      if (sameCount < 2U)
+      {
+        sameCount++;
+      }
+    }
+    else
+    {
+      lastRaw = raw;
+      sameCount = 0;
+    }
+
+    if ((sameCount >= 2U) && (raw != stableButtons))
+    {
+      stableButtons = raw;
+      HID_Event_t ev = { EV_MOUSE, stableButtons, 0, 0 };
+      (void)osMessageQueuePut(hidQueueHandle, &ev, 0U, 0U);
+    }
+
+    osDelay(15);
   }
   /* USER CODE END StartButtonTask */
 }
@@ -1178,10 +1216,55 @@ void StartButtonTask(void *argument)
 void StartUsbHidTask(void *argument)
 {
   /* USER CODE BEGIN StartUsbHidTask */
+  /* Sole consumer of hidQueue and the only task allowed to send USB reports.
+     Touch-move events (a==0, deltas!=0) must not clear the physical button
+     state, so the current button state is tracked here and merged in. */
+  HID_Event_t ev;
+  uint8_t mouseButtons = 0;
+
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    if (osMessageQueueGet(hidQueueHandle, &ev, NULL, osWaitForever) != osOK)
+    {
+      continue;
+    }
+
+    switch (ev.type)
+    {
+    case EV_MOUSE:
+      if ((ev.b == 0) && (ev.c == 0))
+      {
+        /* Button state change from buttonTask */
+        mouseButtons = ev.a;
+        SendMouse(mouseButtons, 0, 0);
+      }
+      else
+      {
+        /* Pointer movement from touch: keep held buttons pressed */
+        SendMouse(mouseButtons | ev.a, ev.b, ev.c);
+      }
+      break;
+
+    case EV_KEYBOARD:
+      /* Screen buttons are momentary: send press then release */
+      SendKey(ev.a, 1);
+      osDelay(15);
+      SendKey(0, 0);
+      break;
+
+    case EV_CONSUMER:
+      SendConsumer(ev.a, 1);
+      osDelay(15);
+      SendConsumer(0, 0);
+      break;
+
+    default:
+      break;
+    }
+
+    /* Never send faster than the IN endpoint polling interval */
+    osDelay(10);
   }
   /* USER CODE END StartUsbHidTask */
 }

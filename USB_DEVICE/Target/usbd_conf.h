@@ -35,7 +35,10 @@
 #include "stm32f4xx_hal.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+/* IN endpoint size must fit the longest report including its Report ID byte:
+   mouse = 4, keyboard = 9, consumer = 2  ->  9 bytes.
+   The middleware default (2U) is guarded by #ifndef, so this override wins. */
+#define CUSTOM_HID_EPIN_SIZE     9U
 /* USER CODE END INCLUDE */
 
 /** @addtogroup USBD_OTG_DRIVER
@@ -75,7 +78,11 @@
 /*---------- -----------*/
 #define USBD_SELF_POWERED     1U
 /*---------- -----------*/
-#define HID_HS_BINTERVAL     0x7U
+#define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE     2U
+/*---------- -----------*/
+#define USBD_CUSTOM_HID_REPORT_DESC_SIZE     128U
+/*---------- -----------*/
+#define CUSTOM_HID_HS_BINTERVAL     0x5U
 
 /****************************************/
 /* #define for FS and HS identification */

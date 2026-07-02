@@ -25,6 +25,8 @@ public:
      */
     virtual void deactivate();
 
+    void moveMouse(int16_t dx, int16_t dy);
+
     virtual ~ScreenMainPresenter() {}
 
 private:

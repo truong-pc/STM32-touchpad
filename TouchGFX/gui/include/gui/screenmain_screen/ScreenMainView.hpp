@@ -3,6 +3,7 @@
 
 #include <gui_generated/screenmain_screen/ScreenMainViewBase.hpp>
 #include <gui/screenmain_screen/ScreenMainPresenter.hpp>
+#include <touchgfx/events/DragEvent.hpp>
 
 class ScreenMainView : public ScreenMainViewBase
 {
@@ -11,6 +12,7 @@ public:
     virtual ~ScreenMainView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    virtual void handleDragEvent(const touchgfx::DragEvent& evt);
 protected:
 };
 

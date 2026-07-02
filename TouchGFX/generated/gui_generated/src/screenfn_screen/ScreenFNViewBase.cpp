@@ -32,6 +32,7 @@ ScreenFNViewBase::ScreenFNViewBase() :
     btnDown.setXY(90, 180);
     btnDown.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_FILL_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_FILL_PRESSED_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_DOWNWARD_50_50_E8F6FB_SVG_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_DOWNWARD_50_50_E8F6FB_SVG_ID));
     btnDown.setIconXY(5, 5);
+    btnDown.setAction(buttonCallback);
     add(btnDown);
 
     btnRight.setXY(160, 112);
@@ -100,16 +101,12 @@ void ScreenFNViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src
         //Call arrowUpClicked
         arrowUpClicked();
     }
-    if (&src == &btnVolDown)
+    if (&src == &btnDown)
     {
         //Interaction2
-        //When btnVolDown clicked call virtual function
+        //When btnDown clicked call virtual function
         //Call arrowDownClicked
-        arrowDownClicked();
-        //Interaction6
-        //When btnVolDown clicked call virtual function
-        //Call volDownClicked
-        volDownClicked();
+        arrowDownClicked();
     }
     if (&src == &btnRight)
     {
@@ -131,6 +128,13 @@ void ScreenFNViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src
         //When btnVolUp clicked call virtual function
         //Call volUpClicked
         volUpClicked();
+    }
+    if (&src == &btnVolDown)
+    {
+        //Interaction6
+        //When btnVolDown clicked call virtual function
+        //Call volDownClicked
+        volDownClicked();
     }
     if (&src == &btnPlayPause)
     {
